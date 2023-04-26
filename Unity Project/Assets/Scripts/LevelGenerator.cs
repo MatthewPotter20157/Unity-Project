@@ -8,9 +8,10 @@ public class LevelGenerator : MonoBehaviour
 	public int height = 30;
 
 	public GameObject wall;
-	public GameObject player;
+	public GameObject enemy;
 
-	private bool playerSpawned = false;
+	private int waveCount = 1;
+	private int enemyCount = 0;
 
 	// Use this for initialization
 	void Start()
@@ -34,15 +35,23 @@ public class LevelGenerator : MonoBehaviour
 					Vector3 pos = new Vector3(x - width / 2f, 0, y - height / 2f);
 					Instantiate(wall, pos, Quaternion.identity, transform);
 				}
-				else if (!playerSpawned) // Should we spawn a player?
+				else if (waveCount != 0) // Should we spawn a player?
 				{
 					// Spawn the player
-					Vector3 pos = new Vector3(x - width / 2f, 1.25f, y - height / 2f);
-					Instantiate(player, pos, Quaternion.identity);
-					playerSpawned = true;
+					Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
+					Instantiate(enemy, pos, Quaternion.identity);
+					waveCount --;
+					enemyCount ++;
 				}
 			}
 		}
 	}
 
+    void Update()
+    {
+		while (enemyCount == 0)
+		{
+			waveCount += 2;
+		}
+    }
 }

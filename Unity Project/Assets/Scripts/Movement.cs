@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+        transform.Translate(forwardInput * Vector3.forward * Time.deltaTime * speed, Space.World);
+        transform.Translate(horizontalInput * Vector3.right * Time.deltaTime * speed, Space.World);
     }
 }
