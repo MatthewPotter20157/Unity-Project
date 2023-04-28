@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public GameObject Bullet;
+    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,15 +14,15 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-
-        transform.up = direction;
+        Vector3 mousePosition = Input.mousePosition;
+        Debug.Log(mousePosition);
+        //mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        
+        Vector3 direction = new Vector3(mousePosition.x - transform.position.x, 0, mousePosition.z - transform.position.z);
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate
+            Instantiate(bullet, transform.position, transform.rotation);
         }
     }
 }
