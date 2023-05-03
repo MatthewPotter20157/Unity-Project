@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
 
     public Camera cam;
     public GameObject player;
     public NavMeshAgent agent;
+    public GameObject bullet;
     void Start()
     {
         player = GameObject.Find("Player");
+        bullet = GameObject.Find("Bullet");
     }
-    // Update is called once per frame
     void Update()
     {
-        Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-        Ray ray = cam.ScreenPointToRay(lookDirection);
-        RaycastHit hit;
+        agent.SetDestination(player.transform.position);
+    }
 
-        if (Physics.Raycast(ray, out hit))
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
         {
-            agent.SetDestination(hit.point);
+            Destroy(gameObject);
         }
     }
 }

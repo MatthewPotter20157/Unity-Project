@@ -12,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
 
 	private int waveCount = 1;
 	private int enemyCount = 0;
+	private int enemySpawn = 0;
 
 	// Use this for initialization
 	void Start()
@@ -23,6 +24,7 @@ public class LevelGenerator : MonoBehaviour
 	// Create a grid based level
 	void GenerateLevel()
 	{
+		waveCount = enemySpawn;
 		// Loop over the grid
 		for (int x = 0; x <= width; x += 2)
 		{
@@ -40,7 +42,7 @@ public class LevelGenerator : MonoBehaviour
 					// Spawn the player
 					Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
 					Instantiate(enemy, pos, Quaternion.identity);
-					waveCount --;
+					enemySpawn --;
 					enemyCount ++;
 				}
 			}
@@ -52,6 +54,7 @@ public class LevelGenerator : MonoBehaviour
 		while (enemyCount == 0)
 		{
 			waveCount += 2;
+			GenerateLevel();
 		}
     }
 }
