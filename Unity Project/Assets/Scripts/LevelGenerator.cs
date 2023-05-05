@@ -9,6 +9,7 @@ public class LevelGenerator : MonoBehaviour
 
 	public GameObject wall;
 	public GameObject enemy;
+	public GameObject[] walls;
 
 	private int waveCount = 1;
 	private int enemyCount = 0;
@@ -37,9 +38,9 @@ public class LevelGenerator : MonoBehaviour
 					Vector3 pos = new Vector3(x - width / 2f, 0, y - height / 2f);
 					Instantiate(wall, pos, Quaternion.identity, transform);
 				}
-				else if (waveCount != 0) // Should we spawn a player?
+				else if (enemySpawn != 0) // Should we spawn a enemy?
 				{
-					// Spawn the player
+					// Spawn the enemy
 					Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
 					Instantiate(enemy, pos, Quaternion.identity);
 					enemySpawn --;
@@ -47,13 +48,19 @@ public class LevelGenerator : MonoBehaviour
 				}
 			}
 		}
+		surface.BuildNavMesh();
 	}
 
     void Update()
     {
-		while (enemyCount == 0)
+		if (enemyCount == 0)
 		{
+			walls = GameObject.FindGameObjectsWithTag("Wall");
 			waveCount += 2;
+			foreach (GameObject wall in walls)
+            {
+				Destroy(wall);
+            }
 			GenerateLevel();
 		}
     }
