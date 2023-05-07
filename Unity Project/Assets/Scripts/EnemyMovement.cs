@@ -5,9 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-
-    public Camera cam;
-    public GameObject player;
+    private GameObject player;
     public NavMeshAgent agent;
     public GameObject bullet;
     void Start()
@@ -17,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     }
     void Update()
     {
+        gameObject.SetActive(true);
         agent.SetDestination(player.transform.position);
     }
 
@@ -25,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(gameObject);
+            LevelGenerator.enemyCount--;
         }
     }
 }

@@ -20,7 +20,7 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(mousePosition);
+        //Debug.Log(mousePosition);
         AddForceAtAngle(bulletSpeed, player.transform.rotation.y);
         if (Mathf.Abs(gameObject.transform.position.x) > 32 || Mathf.Abs(gameObject.transform.position.z) > 32)
         {

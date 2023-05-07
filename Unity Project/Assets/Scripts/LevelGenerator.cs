@@ -12,7 +12,7 @@ public class LevelGenerator : MonoBehaviour
 	public GameObject[] walls;
 
 	private int waveCount = 1;
-	private int enemyCount = 0;
+	public static int enemyCount = 0;
 	private int enemySpawn = 0;
 
 	// Use this for initialization
@@ -25,12 +25,13 @@ public class LevelGenerator : MonoBehaviour
 	// Create a grid based level
 	void GenerateLevel()
 	{
-		waveCount = enemySpawn;
+		enemySpawn = waveCount;
 		// Loop over the grid
 		for (int x = 0; x <= width; x += 2)
 		{
 			for (int y = 0; y <= height; y += 2)
 			{
+				//Debug.Log(enemySpawn);
 				// Should we place a wall?
 				if (Random.value > .7f)
 				{
@@ -38,10 +39,12 @@ public class LevelGenerator : MonoBehaviour
 					Vector3 pos = new Vector3(x - width / 2f, 0, y - height / 2f);
 					Instantiate(wall, pos, Quaternion.identity, transform);
 				}
-				else if (enemySpawn != 0) // Should we spawn a enemy?
+				if (enemySpawn != 0) // Should we spawn a enemy?
 				{
+					//Debug.Log("Spawn");
 					// Spawn the enemy
-					Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
+					Vector3 pos = new Vector3(x - width / Random.Range(2f, 8f), 1f, y - height / Random.Range(2f,8f));
+					Debug.Log(pos);
 					Instantiate(enemy, pos, Quaternion.identity);
 					enemySpawn --;
 					enemyCount ++;
@@ -62,6 +65,7 @@ public class LevelGenerator : MonoBehaviour
 				Destroy(wall);
             }
 			GenerateLevel();
+			Debug.Log("anything");
 		}
     }
 }
