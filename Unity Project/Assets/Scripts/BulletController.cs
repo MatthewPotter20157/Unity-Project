@@ -34,5 +34,6 @@ public class BulletController : MonoBehaviour
         float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
         float zcomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
         bulletRb.AddForce(mousePosition);
+        bulletRb.AddForce(Vector3.forward * bulletSpeed);
     }
 }
