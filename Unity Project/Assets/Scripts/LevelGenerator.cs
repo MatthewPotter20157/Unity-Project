@@ -18,7 +18,7 @@ public class LevelGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		GenerateLevel(); 
+		GenerateLevel();
 		surface.BuildNavMesh();
 	}
 
@@ -55,9 +55,10 @@ public class LevelGenerator : MonoBehaviour
 	}
 
     void Update()
-    {
+	{
 		if (enemyCount == 0)
 		{
+			// destory all the walls to regenrte them because if the wall are not destroyed they will spawn over each other maing the game unplayable
 			walls = GameObject.FindGameObjectsWithTag("Wall");
 			waveCount += 2;
 			foreach (GameObject wall in walls)

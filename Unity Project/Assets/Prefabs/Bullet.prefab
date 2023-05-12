@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deceb1495c5a2944b6f7703e44a06e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 15
+  bulletSpeed: 20
   player: {fileID: 0}
   mousePosition: {x: 0, y: 0, z: 0}
 --- !u!54 &2129552898241321441
