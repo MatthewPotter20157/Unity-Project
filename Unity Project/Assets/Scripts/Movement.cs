@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
-            LevelGenerator.enemyCount--;
+            GameManager.enemyCount--;
         }
     }
 }

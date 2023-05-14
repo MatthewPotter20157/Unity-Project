@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
 
-public class LevelGenerator : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 	public NavMeshSurface surface;
 	public int width = 30;
@@ -14,9 +14,9 @@ public class LevelGenerator : MonoBehaviour
 	private static int wave;
 	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI gameOverText;
-	public TextMeshProUGUI start;
 	public static bool gameOver = false;
 	public GameObject titleScreen;
+	public bool isGameActive = false;
 
 	private int waveCount = 1;
 	public static int enemyCount = 0;
@@ -67,7 +67,7 @@ public class LevelGenerator : MonoBehaviour
 		{
 			GameOver();
 		}
-		if (enemyCount == 0)
+		if (enemyCount == 0 && isGameActive == true)
 		{
 			// destory all the walls to regenrte them because if the wall are not destroyed they will spawn over each other maing the game unplayable
 			walls = GameObject.FindGameObjectsWithTag("Wall");
@@ -103,7 +103,7 @@ public class LevelGenerator : MonoBehaviour
 		gameOverText.gameObject.SetActive(true);
 	}
 
-	void GameStart()
+	public void GameStart()
 	{
 		isGameActive = true;
 		titleScreen.gameObject.SetActive(false);

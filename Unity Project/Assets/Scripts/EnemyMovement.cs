@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject player;
     public NavMeshAgent agent;
     public GameObject bullet;
-    private LevelGenerator levelGenerator;
+    private GameManager gameManager;
     void Start()
     {
         player = GameObject.Find("Player");
         bullet = GameObject.Find("Bullet");
-        levelGenerator = GameObject.Find("LevelGen").GetComponent<LevelGenerator>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Update()
     {
@@ -23,14 +23,16 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("collisoin happened");
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(gameObject);
-            LevelGenerator.enemyCount--;
+            GameManager.enemyCount--;
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            LevelGenerator.GameOver();
+            gameManager.GameOver();
         }
     }
 }

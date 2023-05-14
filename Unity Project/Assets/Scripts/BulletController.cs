@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private GameManager gameManager;
+    //public GameManager gameManager;
     private Rigidbody bulletRb;
     public float bulletSpeed = 20;
     public GameObject player;
