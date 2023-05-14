@@ -8,10 +8,12 @@ public class EnemyMovement : MonoBehaviour
     private GameObject player;
     public NavMeshAgent agent;
     public GameObject bullet;
+    private LevelGenerator levelGenerator;
     void Start()
     {
         player = GameObject.Find("Player");
         bullet = GameObject.Find("Bullet");
+        levelGenerator = GameObject.Find("LevelGen").GetComponent<LevelGenerator>();
     }
     void Update()
     {
@@ -25,6 +27,10 @@ public class EnemyMovement : MonoBehaviour
         {
             Destroy(gameObject);
             LevelGenerator.enemyCount--;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            LevelGenerator.GameOver();
         }
     }
 }

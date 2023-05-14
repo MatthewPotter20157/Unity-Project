@@ -10,11 +10,13 @@ public class BulletController : MonoBehaviour
     public GameObject player;
     public Vector3 mousePosition;
     public GameObject[] walls;
+    public GameObject enemy;
     // Start is called before the first frame update
     void Start()
     {
         bulletRb = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player");
+        enemy = GameObject.Find("Enemy");
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
@@ -28,7 +30,6 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     public void AddForceAtAngle(float force, float angle)
@@ -37,16 +38,14 @@ public class BulletController : MonoBehaviour
         float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
         float zcomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
         bulletRb.AddForce(mousePosition);
-        Vector3.MoveTowards(player.transform.position ,mousePosition, bulletSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        walls = GameObject.FindGameObjectsWithTag("Wall");
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
-            levelGenerator.surface.BuildNavMesh();
+            Destroy(gameObject);
+            Attack.bulletCount--;
         }
     }
 }

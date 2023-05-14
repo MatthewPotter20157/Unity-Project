@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     public Camera cam;
     public GameObject bullet;
     public Vector3 mousePosition;
+    public static float bulletCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +30,14 @@ public class Attack : MonoBehaviour
 
         Vector3 direction = new Vector3(mousePosition.x - transform.position.x, 0, mousePosition.z - transform.position.z);
 
-        if (Input.GetMouseButtonDown(0))
+        if (bulletCount != 3)
         {
-            Instantiate(bullet, transform.position + new Vector3(1, 0, 0), transform.rotation);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Instantiate(bullet, transform.position + new Vector3(0, 0, 1), transform.rotation);
+                bulletCount++;
+            }
+
         }
     }
 }

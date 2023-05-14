@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -10,16 +11,21 @@ public class LevelGenerator : MonoBehaviour
 	public GameObject wall;
 	public GameObject enemy;
 	public GameObject[] walls;
+	private static int wave;
+	public TextMeshProUGUI scoreText; 
+	public TextMeshProUGUI gameOverText;
+	public TextMeshProUGUI start;
+	public static bool gameOver = false; 
+	public GameObject titleScreen;
 
 	private int waveCount = 1;
 	public static int enemyCount = 0;
 	private int enemySpawn = 0;
+	private int highestWave = 0;
 
 	// Use this for initialization
 	void Start()
 	{
-		GenerateLevel();
-		surface.BuildNavMesh();
 	}
 
 	// Create a grid based level
@@ -51,11 +57,16 @@ public class LevelGenerator : MonoBehaviour
 				}
 			}
 		}
+		UpdateScore(1);
 		surface.BuildNavMesh();
 	}
 
     void Update()
 	{
+		if (gameOver == true)
+        {
+			GameOver();
+        }
 		if (enemyCount == 0)
 		{
 			// destory all the walls to regenrte them because if the wall are not destroyed they will spawn over each other maing the game unplayable
@@ -66,7 +77,39 @@ public class LevelGenerator : MonoBehaviour
 				Destroy(wall);
             }
 			GenerateLevel();
-			Debug.Log("anything");
+		}
+		if (Wall.wallsDestroyed == 1)
+        {
+			surface.BuildNavMesh();
+			Wall.wallsDestroyed = 0;
+
 		}
     }
+
+	private void UpdateScore(int scoreToAdd)
+	{
+		wave += scoreToAdd;
+		scoreText.text = "Wave: " + wave;
+		if (wave > highestWave)
+		{
+			highestWave = wave;
+			scoreText.text = "Highest Wave: " + highestWave;
+		}
+	}
+
+	public void GameOver()
+    {
+		isGameActive = false;
+		gameOverText.gameObject.SetActive(true);
+    }
+
+	void GameStart()
+	{
+		isGameActive = true;
+		titleScreen.gameObject.SetActive(false);
+		GenerateLevel();
+		wave = 0;
+		UpdateScore(1);
+		surface.BuildNavMesh();
+	}
 }
