@@ -12,10 +12,10 @@ public class LevelGenerator : MonoBehaviour
 	public GameObject enemy;
 	public GameObject[] walls;
 	private static int wave;
-	public TextMeshProUGUI scoreText; 
+	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI gameOverText;
 	public TextMeshProUGUI start;
-	public static bool gameOver = false; 
+	public static bool gameOver = false;
 	public GameObject titleScreen;
 
 	private int waveCount = 1;
@@ -49,11 +49,11 @@ public class LevelGenerator : MonoBehaviour
 				{
 					//Debug.Log("Spawn");
 					// Spawn the enemy
-					Vector3 pos = new Vector3(x - width / Random.Range(2f, 8f), 1f, y - height / Random.Range(2f,8f));
+					Vector3 pos = new Vector3(x - width / Random.Range(2f, 8f), 1f, y - height / Random.Range(2f, 8f));
 					Debug.Log(pos);
 					Instantiate(enemy, pos, Quaternion.identity);
-					enemySpawn --;
-					enemyCount ++;
+					enemySpawn--;
+					enemyCount++;
 				}
 			}
 		}
@@ -61,30 +61,30 @@ public class LevelGenerator : MonoBehaviour
 		surface.BuildNavMesh();
 	}
 
-    void Update()
+	void Update()
 	{
 		if (gameOver == true)
-        {
+		{
 			GameOver();
-        }
+		}
 		if (enemyCount == 0)
 		{
 			// destory all the walls to regenrte them because if the wall are not destroyed they will spawn over each other maing the game unplayable
 			walls = GameObject.FindGameObjectsWithTag("Wall");
 			waveCount += 2;
 			foreach (GameObject wall in walls)
-            {
+			{
 				Destroy(wall);
-            }
+			}
 			GenerateLevel();
 		}
 		if (Wall.wallsDestroyed == 1)
-        {
+		{
 			surface.BuildNavMesh();
 			Wall.wallsDestroyed = 0;
 
 		}
-    }
+	}
 
 	private void UpdateScore(int scoreToAdd)
 	{
@@ -98,10 +98,10 @@ public class LevelGenerator : MonoBehaviour
 	}
 
 	public void GameOver()
-    {
+	{
 		isGameActive = false;
 		gameOverText.gameObject.SetActive(true);
-    }
+	}
 
 	void GameStart()
 	{

@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
-    private LevelGenerator levelGenerator;
+    private GameManager gameManager;
     private Button button;
     // Start is called before the first frame update
     void Start()
     {
         button = GetComponent<Button>();
         button.onCLick.AddListener(StartGame);
-        levelGenerator = GameObject.Find("LevelGen").GetComponent<LevelGenerator>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
     }
 
