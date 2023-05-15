@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public GameObject wall;
 	public GameObject enemy;
 	public GameObject[] walls;
+	public GameObject[] enemies;
 	private static int wave;
 	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI gameOverText;
@@ -67,9 +68,12 @@ public class GameManager : MonoBehaviour
 		{
 			GameOver();
 		}
+		// restricts jlajsdlkjdsaf
+		//Debug.Log(isGameActive);
 		if (enemyCount == 0 && isGameActive == true)
 		{
-			// destory all the walls to regenrte them because if the wall are not destroyed they will spawn over each other maing the game unplayable
+			Debug.Log("Spawning enemies");
+			// destory all the walls to regenrte them because if the wall are not destroyed they will spawn over each other making the game unplayable
 			walls = GameObject.FindGameObjectsWithTag("Wall");
 			waveCount += 2;
 			foreach (GameObject wall in walls)
@@ -86,6 +90,9 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	// overview
+	// inputs
+	// outputs
 	private void UpdateScore(int scoreToAdd)
 	{
 		wave += scoreToAdd;
@@ -99,8 +106,19 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
+		walls = GameObject.FindGameObjectsWithTag("Wall");
+		foreach (GameObject wall in walls)
+		{
+			Destroy(wall);
+		}
+		enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach (GameObject enemy in enemies)
+		{
+			Destroy(enemy);
+		}
+		Debug.Log("GAME OVER IS HAPPENING");
 		isGameActive = false;
-		gameOverText.gameObject.SetActive(true);
+		titleScreen.gameObject.SetActive(true);
 	}
 
 	public void GameStart()

@@ -30,9 +30,5 @@ public class EnemyMovement : MonoBehaviour
             Destroy(gameObject);
             GameManager.enemyCount--;
         }
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            gameManager.GameOver();
-        }
     }
 }
