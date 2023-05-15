@@ -44,7 +44,9 @@ public class BulletController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            // if the bullet collides with the enemy it spawns a new bullet
             Destroy(gameObject);
+            // sends back to the attack scipt that a bullet is gone so the attack script knows it can spawn another bullet
             Attack.bulletCount--;
         }
     }

@@ -19,23 +19,18 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");//gets the player input
+        horizontalInput = Input.GetAxis("Horizontal");
+        // gets the player input
         forwardInput = Input.GetAxis("Vertical");
 
-        transform.Translate(forwardInput * Vector3.forward * Time.deltaTime * speed, Space.World);//moves the player
+        transform.Translate(forwardInput * Vector3.forward * Time.deltaTime * speed, Space.World);
+        // moves the player
         transform.Translate(horizontalInput * Vector3.right * Time.deltaTime * speed, Space.World);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            gameManager.GameOver();
-        }
-    }
-
     private void OnTriggerEnter(Collider collision)
-    {
+    { 
+        // if the enemy hits the player game over is triggered
         //Debug.Log("collision");
         //Debug.Log("Collision tag is: " + collision.tag);
         if (collision.tag == "Enemy")

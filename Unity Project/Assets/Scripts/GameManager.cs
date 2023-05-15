@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 		{
 			GameOver();
 		}
-		// restricts jlajsdlkjdsaf
+		// restricts enemy spawn so when the game is inactive the enemies wont spawn in
 		//Debug.Log(isGameActive);
 		if (enemyCount == 0 && isGameActive == true)
 		{
@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 	// outputs
 	private void UpdateScore(int scoreToAdd)
 	{
+		// after every wave the score increases by one
 		wave += scoreToAdd;
 		scoreText.text = "Wave: " + wave;
 		if (wave > highestWave)
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
+		// destroys the walls and enemies on scene so nothing is happinging while game over is triggered
 		walls = GameObject.FindGameObjectsWithTag("Wall");
 		foreach (GameObject wall in walls)
 		{
@@ -116,13 +118,15 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(enemy);
 		}
-		Debug.Log("GAME OVER IS HAPPENING");
+		//Debug.Log("GAME OVER IS HAPPENING");
+		// setting the game active to false so nothing spawns
 		isGameActive = false;
 		titleScreen.gameObject.SetActive(true);
 	}
 
 	public void GameStart()
 	{
+		// when the button is clicked it will start spawning the enemies and reset the wave count
 		isGameActive = true;
 		titleScreen.gameObject.SetActive(false);
 		GenerateLevel();

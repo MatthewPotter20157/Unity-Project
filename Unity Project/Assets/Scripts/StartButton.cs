@@ -5,12 +5,9 @@ using System.Collections;
 public class StartButton : MonoBehaviour
 {
     private GameManager gameManager;
-    //public Button button;
     //Start is called before the first frame update
     void Start()
     {
-        //Button play = button.GetComponent<Button>();
-        //play.onClick.AddListener(StartGame);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }
@@ -23,6 +20,7 @@ public class StartButton : MonoBehaviour
 
     public void StartGame()
     {
+        // starts the game
         gameManager.GameStart();
     }
 }

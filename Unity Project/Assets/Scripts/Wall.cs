@@ -19,6 +19,7 @@ public class Wall : MonoBehaviour
 
     private void OnMouseOver()
     {
+        // if the wall is clicked the walls get distroied
         if (Input.GetMouseButtonDown(0))
         {
             Destroy(gameObject);

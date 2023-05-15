@@ -30,11 +30,14 @@ public class Attack : MonoBehaviour
 
         Vector3 direction = new Vector3(mousePosition.x - transform.position.x, 0, mousePosition.z - transform.position.z);
 
+        // if 3 bullets have been spawned it wont spawn any more
         if (bulletCount != 3)
         {
             if (Input.GetMouseButtonDown(0))
             {
+                // spawns the bullet above the player
                 Instantiate(bullet, transform.position + new Vector3(0, 0, 1), transform.rotation);
+                // adds a bullet count
                 bulletCount++;
             }
 
